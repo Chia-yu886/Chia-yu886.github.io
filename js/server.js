@@ -6,7 +6,6 @@ const app = express();
 
 // 使用內建的 JSON 請求處理
 app.use(express.json());
-// 使用內建的 URL-encoded 請求處理
 app.use(express.urlencoded({ extended: true }));
 
 const PORT = 3000;
