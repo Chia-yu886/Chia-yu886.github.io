@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>北商二手書籍資訊平台</title>
+    <link rel="icon" href="./850587955.png" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center; color: #333;">北商二手書籍資訊平台</h1>
+        
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'BookList')">二手書籍一覽</button>
+            <button class="tablinks" onclick="openTab(event, 'SearchBook')">查詢書籍</button>
+            <button class="tablinks" onclick="openTab(event, 'AddBook')">新增書籍</button>
+            <button class="tablinks" onclick="openTab(event, 'DeleteBook')">刪除書籍</button>
+        </div>
+
+        <!-- 書籍一覽 -->
+        <div id="BookList" class="tabcontent active">
+            <h2>二手書籍一覽</h2>
+
+            <div id="allBookList" class="row detail">
+                <div class="col-lg-3 col-md-6">
+                    <span>書名</span>
+                    <h5>555</h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>作者</span>
+                    <h5></h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>價格</span>
+                    <h5></h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>狀態</span>
+                    <h5></h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>賣家</span>
+                    <h5></h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>賣家信箱</span>
+                    <h5></h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>賣家系所</span>
+                    <h5></h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>販售狀態</span>
+                    <h5></h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- 查詢書籍 -->
+        <div id="SearchBook" class="tabcontent">
+            <h2>查詢書籍</h2>
+            <input type="text" id="searchInput" placeholder="請輸入書名或作者">
+            <button onclick="searchBooks()">查詢</button>
+            <h2>查詢結果</h2>
+            <div id="allBookList" class="row detail">
+                <div class="col-lg-3 col-md-6">
+                    <span>書名</span>
+                    <h5></h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>作者</span>
+                    <h5></h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>價格</span>
+                    <h5></h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>狀態</span>
+                    <h5></h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>賣家</span>
+                    <h5></h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>賣家信箱</span>
+                    <h5></h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>賣家系所</span>
+                    <h5></h5>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <span>販售狀態</span>
+                    <h5></h5>
+                </div>
+            </div>
+        </div>
+
+        <!-- 新增書籍 -->
+        <div id="AddBook" class="tabcontent">
+            <h2>新增書籍</h2>
+            <form id="bookForm">
+                <input type="text" name="title" placeholder="書名" required>
+                <input type="text" name="author" placeholder="作者" required>
+                <select name="condition" required>
+                    <option value="">書籍狀態</option>
+                    <option value="近全新">近全新</option>
+                    <option value="些許使用痕跡">些許使用痕跡</option>
+                    <option value="良好">良好</option>
+                </select>
+                <input type="number" name="price" placeholder="價格" step="0.01" required>
+                <input type="text" name="seller_nickname" placeholder="賣家暱稱" required>
+                <input type="email" name="seller_email" placeholder="賣家信箱" required>
+                <select name="department" required>
+                    <option value="">賣家系所</option>
+                    <option value="會計資訊系">會計資訊系</option>
+                    <option value="財務金融系">財務金融系</option>
+                    <option value="財政稅務系">財政稅務系</option>
+                    <option value="國際商務系">國際商務系</option>
+                    <option value="應用外語系">應用外語系</option>
+                    <option value="企業管理系">企業管理系</option>
+                    <option value="資訊管理系">資訊管理系</option>
+                </select>
+                <select name="status" required>
+                    <option value="">交易狀態</option>
+                    <option value="可交易">可交易</option>
+                    <option value="已預訂">已預訂</option>
+                    <option value="已售出">已售出</option>
+                </select>
+                <button type="submit">新增書籍</button>
+            </form>
+        </div>
+
+        <!-- 刪除書籍 -->
+        <div id="DeleteBook" class="tabcontent">
+            <h2>刪除書籍</h2>
+            <input type="text" id="deleteBookId" placeholder="請輸入賣家信箱">
+            <input type="text" id="deleteBookId" placeholder="請輸入書籍ID">
+            <button>刪除</button>
+        </div>
+    </div>
+
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap.bundle.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>
