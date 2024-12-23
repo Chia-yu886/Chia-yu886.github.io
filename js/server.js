@@ -12,6 +12,10 @@ app.use(express.json());
 
 // MongoDB 連接
 const uri = process.env.MONGO_URI;
+if (!uri) {
+    console.error("MONGO_URI is not defined in .env file");
+    process.exit(1); // 終止程序
+}
 const client = new MongoClient(uri);
 
 let booksCollection;
@@ -22,9 +26,14 @@ async function connectMongoDB() {
         await client.connect();
         const database = client.db("secondhand-books");
         booksCollection = database.collection("books");
+
+        // 建立索引（可選）
+        await booksCollection.createIndex({ title: "text", author: "text" });
+
         console.log("Connected to MongoDB!");
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
+        process.exit(1); // 終止程序
     }
 }
 
@@ -64,4 +73,11 @@ app.get('/api/books/search', async (req, res) => {
 // 啟動伺服器
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
+});
+
+// 處理伺服器關閉
+process.on("SIGINT", async () => {
+    console.log("Closing MongoDB connection...");
+    await client.close();
+    process.exit(0);
 });
