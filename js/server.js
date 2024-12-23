@@ -1,5 +1,5 @@
 const express = require("express");
-
+const cors = require("cors");
 const app = express();
 // 使用內建的 JSON 請求處理
 app.use(express.json());
