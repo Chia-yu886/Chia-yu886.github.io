@@ -106,49 +106,52 @@ async function searchBooks() {
     }
 }
 
-// 顯示查詢結果
 function displaySearchResults(books) {
     const resultsContainer = document.getElementById("searchResults");
+
+    // 清空結果容器
+    resultsContainer.innerHTML = "";
 
     if (books.length === 0) {
         resultsContainer.innerHTML = "<p>未找到相關書籍。</p>";
         return;
     }
 
+    // 遍歷書籍數據並生成對應的 HTML
     books.forEach(book => {
         const bookElement = `
-            <div class="col-12 book-item">
+            <div class="col-12 book-item border p-3 mb-3">
                 <div class="row detail">
-                    <div class="col-lg-3 col-md-6">
-                        <span>書名</span>
+                    <div class="col-lg-4 col-md-6">
+                        <span>書名：</span>
                         <h5>${book.title}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <span>作者</span>
+                    <div class="col-lg-4 col-md-6">
+                        <span>作者：</span>
                         <h5>${book.author}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <span>書籍狀態</span>
+                    <div class="col-lg-4 col-md-6">
+                        <span>書籍狀態：</span>
                         <h5>${book.book_condition}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <span>價格</span>
-                        <h5>NT$ ${book.price}</h5>
+                    <div class="col-lg-4 col-md-6">
+                        <span>價格：</span>
+                        <h5>NT$ ${book.price.toFixed(2)}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <span>賣家暱稱</span>
+                    <div class="col-lg-4 col-md-6">
+                        <span>賣家暱稱：</span>
                         <h5>${book.seller_nickname}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <span>賣家信箱</span>
+                    <div class="col-lg-4 col-md-6">
+                        <span>賣家信箱：</span>
                         <h5>${book.seller_email}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <span>賣家系所</span>
+                    <div class="col-lg-4 col-md-6">
+                        <span>賣家系所：</span>
                         <h5>${book.department}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <span>販售狀態</span>
+                    <div class="col-lg-4 col-md-6">
+                        <span>販售狀態：</span>
                         <h5 class="status-${book.status === "可交易" ? "available" : "reserved"}">
                             ${book.status}
                         </h5>
@@ -159,6 +162,7 @@ function displaySearchResults(books) {
         resultsContainer.innerHTML += bookElement;
     });
 }
+
 
 // 在 DOM 加載完成後執行
 document.addEventListener("DOMContentLoaded", function () {
