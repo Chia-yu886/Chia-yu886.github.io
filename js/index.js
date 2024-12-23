@@ -18,42 +18,24 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchBooks();
 });
 
-
-const mockBooks = [
-    {
-        "title": "作業研究案例研究",
-        "author": "劉志強",
-        "book_condition": "近全新",
-        "price": 350,
-        "seller_nickname": "紅燈右轉專家",
-        "seller_email": "thkfp10@gmail.com",
-        "department": "財務金融系",
-        "status": "已預訂"
-    },
-    // ... 其他書籍數據
-];
-
+// 獲取並顯示書籍列表
 async function fetchBooks() {
     try {
-        // 暫時使用模擬數據
-        displayBooks(mockBooks);
-        
-        // 實際 API 連接（等後端準備好後使用）
-        /*
-        const response = await fetch('你的API網址/api/books');
+        const response = await fetch("http://localhost:3000/api/books"); // 後端 API 地址
+        if (!response.ok) throw new Error("Network response was not ok");
         const books = await response.json();
         displayBooks(books);
-        */
     } catch (error) {
-        console.error('Error fetching books:', error);
-        document.getElementById('allBookList').innerHTML = 
+        console.error("Error fetching books:", error);
+        document.getElementById("allBookList").innerHTML =
             '<div class="col-12"><p class="text-danger">載入資料時發生錯誤</p></div>';
     }
 }
 
+// 渲染書籍列表
 function displayBooks(books) {
-    const container = document.getElementById('allBookList');
-    container.innerHTML = '';
+    const container = document.getElementById("allBookList");
+    container.innerHTML = "";
 
     books.forEach(book => {
         const bookElement = `
@@ -89,7 +71,9 @@ function displayBooks(books) {
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <span>販售狀態</span>
-                        <h5 class="status-${book.status}">${book.status}</h5>
+                        <h5 class="status-${book.status === "可交易" ? "available" : "reserved"}">
+                            ${book.status}
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -97,3 +81,8 @@ function displayBooks(books) {
         container.innerHTML += bookElement;
     });
 }
+
+// 在 DOM 加載完成後觸發
+document.addEventListener("DOMContentLoaded", function () {
+    fetchBooks();
+});
