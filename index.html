@@ -22,41 +22,14 @@
         <!-- 書籍一覽 -->
         <div id="BookList" class="tabcontent active">
             <h2>二手書籍一覽</h2>
-
-            <div id="allBookList" class="row detail">
-                <div class="col-lg-3 col-md-6">
-                    <span>書名</span>
-                    <h5>555</h5>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <span>作者</span>
-                    <h5></h5>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <span>價格</span>
-                    <h5></h5>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <span>狀態</span>
-                    <h5></h5>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <span>賣家</span>
-                    <h5></h5>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <span>賣家信箱</span>
-                    <h5></h5>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <span>賣家系所</span>
-                    <h5></h5>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <span>販售狀態</span>
-                    <h5></h5>
-                </div>
+            <div id="allBookList" class="row">
+                <!-- 書籍列表將由 JavaScript 動態生成 -->
             </div>
+        </div>
+
+        <!-- 添加載入提示 -->
+        <div id="loading" style="display: none;">
+            <p>載入中...</p>
         </div>
 
         <!-- 查詢書籍 -->
@@ -147,6 +120,7 @@
 
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/bootstrap.bundle.js"></script>
+    <script src="./js/server.js"></script>
     <script src="./js/index.js"></script>
 </body>
 </html>

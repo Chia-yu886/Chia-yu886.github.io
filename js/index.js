@@ -15,3 +15,67 @@ function openTab(evt, tabName) {
     evt.currentTarget.classList.add("active");
 }
 
+// index.js
+document.addEventListener('DOMContentLoaded', function() {
+    fetchBooks();
+});
+
+async function fetchBooks() {
+    try {
+        const response = await fetch('http://localhost:3000/api/books');
+        const books = await response.json();
+        displayBooks(books);
+    } catch (error) {
+        console.error('Error fetching books:', error);
+        document.getElementById('allBookList').innerHTML = 
+            '<div class="col-12"><p class="text-danger">載入資料時發生錯誤</p></div>';
+    }
+}
+
+function displayBooks(books) {
+    const container = document.getElementById('allBookList');
+    container.innerHTML = ''; // 清空現有內容
+
+    books.forEach(book => {
+        const bookElement = `
+            <div class="col-12 book-item mb-4 p-3 border rounded">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-2">
+                        <span class="fw-bold">書名</span>
+                        <h5>${book.title}</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-2">
+                        <span class="fw-bold">作者</span>
+                        <h5>${book.author}</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-2">
+                        <span class="fw-bold">書籍狀態</span>
+                        <h5>${book.book_condition}</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-2">
+                        <span class="fw-bold">價格</span>
+                        <h5>NT$ ${book.price}</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-2">
+                        <span class="fw-bold">賣家</span>
+                        <h5>${book.seller_nickname}</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-2">
+                        <span class="fw-bold">賣家信箱</span>
+                        <h5>${book.seller_email}</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-2">
+                        <span class="fw-bold">賣家系所</span>
+                        <h5>${book.department}</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-2">
+                        <span class="fw-bold">販售狀態</span>
+                        <h5 class="status-${book.status}">${book.status}</h5>
+                    </div>
+                </div>
+            </div>
+        `;
+        container.innerHTML += bookElement;
+    });
+}
+
