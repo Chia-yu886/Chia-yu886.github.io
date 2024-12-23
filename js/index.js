@@ -14,17 +14,36 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).classList.add("active");
     evt.currentTarget.classList.add("active");
 }
-
-// index.js
 document.addEventListener('DOMContentLoaded', function() {
     fetchBooks();
 });
 
+
+const mockBooks = [
+    {
+        "title": "作業研究案例研究",
+        "author": "劉志強",
+        "book_condition": "近全新",
+        "price": 350,
+        "seller_nickname": "紅燈右轉專家",
+        "seller_email": "thkfp10@gmail.com",
+        "department": "財務金融系",
+        "status": "已預訂"
+    },
+    // ... 其他書籍數據
+];
+
 async function fetchBooks() {
     try {
-        const response = await fetch('http://localhost:3000/api/books');
+        // 暫時使用模擬數據
+        displayBooks(mockBooks);
+        
+        // 實際 API 連接（等後端準備好後使用）
+        /*
+        const response = await fetch('你的API網址/api/books');
         const books = await response.json();
         displayBooks(books);
+        */
     } catch (error) {
         console.error('Error fetching books:', error);
         document.getElementById('allBookList').innerHTML = 
@@ -34,7 +53,7 @@ async function fetchBooks() {
 
 function displayBooks(books) {
     const container = document.getElementById('allBookList');
-    container.innerHTML = ''; // 清空現有內容
+    container.innerHTML = '';
 
     books.forEach(book => {
         const bookElement = `
@@ -78,4 +97,3 @@ function displayBooks(books) {
         container.innerHTML += bookElement;
     });
 }
-
