@@ -14,9 +14,6 @@ function openTab(evt, tabName) {
     document.getElementById(tabName).classList.add("active");
     evt.currentTarget.classList.add("active");
 }
-document.addEventListener('DOMContentLoaded', function() {
-    fetchBooks();
-});
 
 // 獲取並顯示書籍列表
 async function fetchBooks() {
@@ -27,14 +24,14 @@ async function fetchBooks() {
         displayBooks(books);
     } catch (error) {
         console.error("Error fetching books:", error);
-        document.getElementById("allBookList").innerHTML =
+        document.querySelector(".allBookList").innerHTML =
             '<div class="col-12"><p class="text-danger">載入資料時發生錯誤</p></div>';
     }
 }
 
 // 渲染書籍列表
 function displayBooks(books) {
-    const container = document.getElementById("allBookList");
+    const container = document.querySelector(".allBookList");
     container.innerHTML = "";
 
     books.forEach(book => {
@@ -82,6 +79,8 @@ function displayBooks(books) {
     });
 }
 
+// 查詢
+
 async function searchBooks() {
     const query = document.getElementById('searchInput').value.trim();
     const resultsContainer = document.getElementById('searchResults');
@@ -104,6 +103,7 @@ async function searchBooks() {
     }
 }
 
+
 // 顯示查詢結果
 function displaySearchResults(books) {
     const resultsContainer = document.getElementById('searchResults');
@@ -115,7 +115,7 @@ function displaySearchResults(books) {
 
     books.forEach(book => {
         const bookElement = `
-        <div id="allBookList" class="row detail">    
+        <div class="allBookList row detail">    
             <div class="col-12 book-item">
                 <div class="row detail">
                     <div class="col-lg-3 col-md-6">
