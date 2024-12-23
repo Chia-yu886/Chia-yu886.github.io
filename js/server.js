@@ -60,6 +60,13 @@ app.get('/api/books/search', async (req, res) => {
     }
 });
 
+// 新增書籍 API
+app.post("/api/books", (req, res) => {
+    const book = req.body;
+    books.push(book); // 將新書籍加入模擬數據庫
+    res.status(201).json({ message: "書籍已成功新增", book });
+});
+
 // 啟動伺服器
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
