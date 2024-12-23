@@ -39,6 +39,27 @@ app.get("/api/books", async (req, res) => {
     }
 });
 
+// 查詢書籍 API
+app.get('/api/books/search', async (req, res) => {
+    try {
+        const query = req.query.q;
+        if (!query) return res.status(400).json({ message: '缺少查詢條件' });
+
+        // 使用正則表達式進行模糊查詢
+        const results = await booksCollection.find({
+            $or: [
+                { title: { $regex: query, $options: 'i' } }, // 按書名查詢，忽略大小寫
+                { author: { $regex: query, $options: 'i' } } // 按作者查詢，忽略大小寫
+            ]
+        }).toArray();
+
+        res.json(results);
+    } catch (error) {
+        console.error('Error searching books:', error);
+        res.status(500).json({ message: '查詢書籍時發生錯誤', error });
+    }
+});
+
 // 啟動伺服器
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
