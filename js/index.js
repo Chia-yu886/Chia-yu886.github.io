@@ -57,37 +57,37 @@ function displayBooks(books) {
 
     books.forEach(book => {
         const bookElement = `
-            <div class="col-12 book-item mb-4 p-3 border rounded">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 mb-2">
+            <div class="col-12 book-item">
+                <div class="row detail ">
+                    <div class="col-lg-3 col-md-6">
                         <span class="fw-bold">書名</span>
                         <h5>${book.title}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6 mb-2">
+                    <div class="col-lg-3 col-md-6">
                         <span class="fw-bold">作者</span>
                         <h5>${book.author}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6 mb-2">
+                    <div class="col-lg-3 col-md-6">
                         <span class="fw-bold">書籍狀態</span>
                         <h5>${book.book_condition}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6 mb-2">
+                    <div class="col-lg-3 col-md-6">
                         <span class="fw-bold">價格</span>
                         <h5>NT$ ${book.price}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6 mb-2">
+                    <div class="col-lg-3 col-md-6">
                         <span class="fw-bold">賣家</span>
                         <h5>${book.seller_nickname}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6 mb-2">
+                    <div class="col-lg-3 col-md-6">
                         <span class="fw-bold">賣家信箱</span>
                         <h5>${book.seller_email}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6 mb-2">
+                    <div class="col-lg-3 col-md-6">
                         <span class="fw-bold">賣家系所</span>
                         <h5>${book.department}</h5>
                     </div>
-                    <div class="col-lg-3 col-md-6 mb-2">
+                    <div class="col-lg-3 col-md-6">
                         <span class="fw-bold">販售狀態</span>
                         <h5 class="status-${book.status}">${book.status}</h5>
                     </div>
