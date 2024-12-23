@@ -120,38 +120,39 @@ function displaySearchResults(books) {
     // 遍歷書籍數據並生成對應的 HTML
     books.forEach(book => {
         const bookElement = `
-            <div class="col-12 book-item border p-3 mb-3">
-                <div class="row detail">
-                    <div class="col-lg-4 col-md-6">
-                        <span>書名：</span>
+            <div class="col-12 book-item">
+            <h2>查詢結果</h2>
+                 <div class="row detail">
+                    <div class="col-lg-6 col-md-12">
+                        <span><strong>書名：</strong></span>
                         <h5>${book.title}</h5>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <span>作者：</span>
+                    <div class="col-lg-6 col-md-12">
+                        <span><strong>作者：</strong></span>
                         <h5>${book.author}</h5>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <span>書籍狀態：</span>
+                    <div class="col-lg-6 col-md-12">
+                        <span><strong>書籍狀態：</strong></span>
                         <h5>${book.book_condition}</h5>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <span>價格：</span>
-                        <h5>NT$ ${book.price.toFixed(2)}</h5>
+                    <div class="col-lg-6 col-md-12">
+                        <span><strong>價格：</strong></span>
+                        <h5>NT$ ${book.price}</h5>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <span>賣家暱稱：</span>
+                    <div class="col-lg-6 col-md-12">
+                        <span><strong>賣家暱稱：</strong></span>
                         <h5>${book.seller_nickname}</h5>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <span>賣家信箱：</span>
+                    <div class="col-lg-6 col-md-12">
+                        <span><strong>賣家信箱：</strong></span>
                         <h5>${book.seller_email}</h5>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <span>賣家系所：</span>
+                    <div class="col-lg-6 col-md-12">
+                        <span><strong>賣家系所：</strong></span>
                         <h5>${book.department}</h5>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <span>販售狀態：</span>
+                    <div class="col-lg-6 col-md-12">
+                        <span><strong>販售狀態：</strong></span>
                         <h5 class="status-${book.status === "可交易" ? "available" : "reserved"}">
                             ${book.status}
                         </h5>
