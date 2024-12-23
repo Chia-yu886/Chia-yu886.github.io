@@ -121,8 +121,8 @@ function displaySearchResults(books) {
     // 遍歷書籍數據並生成 HTML
     books.forEach(book => {
         const bookElement = `
-            <div class="col-12 book-item border p-3 mb-3 bg-light rounded">
-                <div class="row">
+            <div class="col-12 book-item">
+                <div class="row detail">
                     <div class="col-lg-3 col-md-6">
                         <span>書名：</span>
                         <h5>${book.title}</h5>
@@ -163,6 +163,7 @@ function displaySearchResults(books) {
         resultsContainer.innerHTML += bookElement;
     });
 }
+
 
 
 // 在 DOM 加載完成後執行
