@@ -1,40 +1,33 @@
-// // server.js
-// const express = require('express');
-// const mongoose = require('mongoose');
-// const cors = require('cors');
-// const app = express();
+const { MongoClient } = require('mongodb');
 
-// app.use(cors());
-// app.use(express.json());
+// mongo連接字串
+const uri = "mongodb+srv://4ISH:Aa04031219@secondhand-books.elqsc.mongodb.net/secondhand_books?retryWrites=true&w=majority";
 
-// // MongoDB 連接
-// mongoose.connect('mongodb://localhost:27017/secondhand-books', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// });
+// 創建 MongoClient 實例
+const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
 
-// // 定義書籍模型
-// const Book = mongoose.model('Book', {
-//     title: String,
-//     author: String,
-//     book_condition: String,
-//     price: Number,
-//     seller_nickname: String,
-//     seller_email: String,
-//     department: String,
-//     status: String
-// });
+async function connectMongoDB() {
+    try {
+        // 連接到 MongoDB
+        await client.connect();
+        console.log("Connected to MongoDB!");
 
-// // API 端點
-// app.get('/api/books', async (req, res) => {
-//     try {
-//         const books = await Book.find();
-//         res.json(books);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// });
+        // 選擇資料庫和集合
+        const database = client.db("secondhand_books");
+        const collection = database.collection("books");
 
-// app.listen(3000, () => {
-//     console.log('Server running on port 3000');
-// });
+        // 測試查詢集合中的資料
+        const results = await collection.find({}).toArray();
+        console.log("Documents retrieved:", results);
+    } catch (error) {
+        console.error("Error connecting to MongoDB:", error);
+    } finally {
+        // 關閉連接
+        await client.close();
+    }
+}
+
+connectMongoDB();
