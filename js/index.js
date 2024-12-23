@@ -128,8 +128,30 @@ function displaySearchResults(books) {
                         <h5>${book.author}</h5>
                     </div>
                     <div class="col-lg-3 col-md-6">
+                        <span>書籍狀態</span>
+                        <h5>${book.book_condition}</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
                         <span>價格</span>
                         <h5>NT$ ${book.price}</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <span>賣家暱稱</span>
+                        <h5>${book.seller_nickname}</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <span>賣家信箱</span>
+                        <h5>${book.seller_email}</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <span>賣家系所</span>
+                        <h5>${book.department}</h5>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <span>販售狀態</span>
+                        <h5 class="status-${book.status === "可交易" ? "available" : "reserved"}">
+                            ${book.status}
+                        </h5>
                     </div>
                 </div>
             </div>
