@@ -1,20 +1,17 @@
 const express = require("express");
+const { MongoClient } = require("mongodb");
 const cors = require("cors");
-const { MongoClient } = require("mongodb"); // 引入 MongoClient
+require("dotenv").config(); // 加載環境變數
 
 const app = express();
-
-// 使用內建的 JSON 請求處理
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 const PORT = 3000;
 
 // Middleware
 app.use(cors());
+app.use(express.json());
 
-// MongoDB 連接字串
-const uri = "mongodb+srv://4ISH:Aa04031219@secondhand-books.elqsc.mongodb.net/secondhand_books?retryWrites=true&w=majority";
+// MongoDB 連接
+const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri);
 
 let booksCollection;
@@ -28,17 +25,10 @@ async function connectMongoDB() {
         console.log("Connected to MongoDB!");
     } catch (error) {
         console.error("Error connecting to MongoDB:", error);
-        process.exit(1); // 如果連接失敗，終止程序
     }
 }
 
-// 啟動伺服器並連接到 MongoDB
-connectMongoDB().then(() => {
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
-    });
-});
-
+connectMongoDB();
 
 // API 路由：獲取所有書籍
 app.get("/api/books", async (req, res) => {
