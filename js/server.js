@@ -61,8 +61,6 @@ app.get('/api/books/search', async (req, res) => {
     }
 });
 
-// 新增書籍 API
-
 // 啟動伺服器
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

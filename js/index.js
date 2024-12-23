@@ -164,49 +164,6 @@ function displaySearchResults(books) {
     });
 }
 
-// 新增書籍
-document.addEventListener("DOMContentLoaded", function () {
-    const bookForm = document.getElementById("bookForm");
-
-    bookForm.addEventListener("submit", async function (event) {
-        event.preventDefault(); // 防止表單刷新
-
-        // 獲取表單數據
-        const formData = new FormData(bookForm);
-        const bookData = {
-            title: formData.get("title"),
-            author: formData.get("author"),
-            book_condition: formData.get("condition"),
-            price: parseFloat(formData.get("price")),
-            seller_nickname: formData.get("seller_nickname"),
-            seller_email: formData.get("seller_email"),
-            department: formData.get("department"),
-            status: formData.get("status"),
-        };
-
-        try {
-            // 發送 POST 請求至後端
-            const response = await fetch("http://localhost:3000/api/books", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(bookData),
-            });
-
-            if (response.ok) {
-                const result = await response.json();
-                alert(result.message);
-                bookForm.reset(); // 重置表單
-            } else {
-                alert("新增書籍失敗，請重試！");
-            }
-        } catch (error) {
-            console.error("Error adding book:", error);
-            alert("無法連接伺服器，請稍後再試！");
-        }
-    });
-});
 
 
 // 在 DOM 加載完成後執行
