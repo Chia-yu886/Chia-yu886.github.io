@@ -30,6 +30,15 @@ async function connectMongoDB() {
 
 connectMongoDB();
 
+require("dotenv").config();
+
+console.log("Mongo URI:", process.env.MONGO_URI);
+if (!process.env.MONGO_URI) {
+    console.error("MONGO_URI is not defined in .env file");
+    process.exit(1);
+}
+
+
 // API 路由：獲取所有書籍
 app.get("/api/books", async (req, res) => {
     try {
