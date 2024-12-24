@@ -16,12 +16,14 @@ if (!uri) {
     console.error("MONGO_URI is not defined in .env file");
     process.exit(1); // 終止程序
 }
+
 const client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    tls: true,
-    tlsAllowInvalidCertificates: true, // 僅用於測試，不建議在生產環境使用
+    tls: true, // 啟用 TLS
+    tlsInsecure: false, // 確保連接是安全的
+    connectTimeoutMS: 10000, // 設置超時
+    socketTimeoutMS: 20000, // 套接字超時設置
 });
+
 
 let booksCollection;
 
