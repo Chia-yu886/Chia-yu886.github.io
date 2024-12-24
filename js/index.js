@@ -186,6 +186,68 @@ function displaySearchResults(books) {
     });
 }
 
+// 處理新增書籍表單提交
+document.getElementById('bookForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    const bookData = {
+        title: formData.get('title'),
+        author: formData.get('author'),
+        condition: formData.get('condition'),
+        price: formData.get('price'),
+        seller_nickname: formData.get('seller_nickname'),
+        seller_email: formData.get('seller_email'),
+        department: formData.get('department'),
+        status: formData.get('status')
+    };
+
+    try {
+        const response = await fetch('http://localhost:3000/api/books', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bookData)
+        });
+
+        if (!response.ok) {
+            throw new Error('新增書籍失敗');
+        }
+
+        const result = await response.json();
+        alert('書籍新增成功！');
+        
+        // 清空表單
+        e.target.reset();
+        
+        // 重新載入書籍列表
+        fetchBooks();
+        
+    } catch (error) {
+        console.error('Error adding book:', error);
+        alert('新增書籍時發生錯誤，請稍後再試。');
+    }
+});
+
+// 新增表單驗證功能
+function validateForm() {
+    const price = document.querySelector('input[name="price"]').value;
+    if (price < 0) {
+        alert('價格不能為負數！');
+        return false;
+    }
+    return true;
+}
+
+// 為表單添加驗證
+document.getElementById('bookForm').onsubmit = function(e) {
+    if (!validateForm()) {
+        e.preventDefault();
+        return false;
+    }
+    return true;
+};
 
 
 // 在 DOM 加載完成後執行
