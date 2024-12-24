@@ -16,7 +16,12 @@ if (!uri) {
     console.error("MONGO_URI is not defined in .env file");
     process.exit(1); // 終止程序
 }
-const client = new MongoClient(uri);
+const client = new MongoClient(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    tls: true,
+    tlsAllowInvalidCertificates: true, // 僅用於測試，不建議在生產環境使用
+});
 
 let booksCollection;
 
