@@ -18,12 +18,10 @@ if (!uri) {
 }
 
 const client = new MongoClient(uri, {
-    tls: true, // 啟用 TLS
-    tlsInsecure: false, // 確保連接是安全的
-    connectTimeoutMS: 10000, // 設置超時
-    socketTimeoutMS: 20000, // 套接字超時設置
+  ssl: true,
+  tls: true,
+  tlsAllowInvalidCertificates: true
 });
-
 
 let booksCollection;
 
