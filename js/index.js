@@ -18,6 +18,28 @@ function openTab(evt, tabName) {
     evt.currentTarget.classList.add("active");
 }
 
+async function connectMongoDB() {
+    try {
+        await client.connect();
+        const database = client.db("secondhand-books");
+        booksCollection = database.collection("books");
+        
+        // Test the connection
+        await database.command({ ping: 1 });
+        console.log("Successfully connected to MongoDB!");
+        
+        // 建立索引（可選）
+        await booksCollection.createIndex({ title: "text", author: "text" });
+    } catch (error) {
+        console.error("MongoDB connection error:", error);
+        // Add more specific error handling
+        if (error.code === 'ERR_SSL_TLSV1_ALERT_INTERNAL_ERROR') {
+            console.error("SSL/TLS connection error. Please check your connection string and certificates.");
+        }
+        process.exit(1);
+    }
+}
+
 // 獲取並顯示書籍列表
 async function fetchBooks() {
     try {
