@@ -18,12 +18,17 @@ if (!uri) {
 }
 
 const client = new MongoClient(uri, {
+    ssl: true,
     tls: true,
-    tlsAllowInvalidCertificates: true,  // Add this for development
+    tlsAllowInvalidCertificates: true,
     retryWrites: true,
+    w: 'majority',
     maxPoolSize: 10,
-    connectTimeoutMS: 10000,
-    socketTimeoutMS: 20000
+    serverApi: {
+        version: '1',
+        strict: true,
+        deprecationErrors: true
+    }
 });
 
 let booksCollection;
