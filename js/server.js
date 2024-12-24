@@ -83,7 +83,7 @@ app.get('/api/books/search', async (req, res) => {
     }
 });
 
-// // 新增書籍
+// 新增書籍 API
 app.post("/api/books", async (req, res) => {
     try {
         const newBook = {
@@ -95,19 +95,22 @@ app.post("/api/books", async (req, res) => {
             seller_email: req.body.seller_email,
             department: req.body.department,
             status: req.body.status,
-            created_at: new Date()
+            created_at: new Date() // 記錄新增時間
         };
 
+        // 將書籍插入到 MongoDB
         const result = await booksCollection.insertOne(newBook);
-        res.status(201).json({ 
+
+        res.status(201).json({
             message: "書籍新增成功",
-            bookId: result.insertedId 
+            bookId: result.insertedId
         });
     } catch (error) {
-        console.error("Error adding new book:", error);
-        res.status(500).json({ message: "新增書籍時發生錯誤", error });
+        console.error("新增書籍時發生錯誤:", error);
+        res.status(500).json({ message: "新增書籍失敗", error });
     }
 });
+
 
 // 啟動伺服器
 app.listen(PORT, () => {
